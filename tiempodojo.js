@@ -1,30 +1,33 @@
-function removeButton(){
-    let popup=document.querySelector(".bodyContainerMessage");
-    popup.style.display="none";
+
+console.log("page loading...");
+
+var cookieDiv = document.querySelector(".cookie-policy");
+
+function loading() {
+    alert("Loading weather report...")
 }
 
-function convert(element){
-    let elementValue=element.value;
-    let elementMax= document.getElementById("max");
-    let elementMin= document.getElementById("min");
-    if(elementValue==="fº"){
-        for (let i= 0; i < elementMax.length; i++){
-            let valorMax= elementMax[i].innerHTML;
-            let fahrenheitMax= (valorMax*9)/5+32;
-            elementMax[i].innerHTML= Math.round(fahrenheitMax);
-            let valorMin= elementMin[i].innerHTML;
-            let fahrenheitMin= (valorMin*9)/5+32;
-            elementMin[i].innerHTML=Math.round(fahrenheitMin);
+function accept() {
+    cookieDiv.remove();
+}
+
+function c2f(temp) {
+    return Math.round(9 / 5 * temp + 32);
+}
+
+function f2c(temp) {
+    return Math.round(5 / 9 * (temp - 32));
+}
+
+function convert(element) {
+    console.log(element.value);
+    for(var i=1; i<9; i++) {
+        var tempSpan = document.querySelector("#temp" + i);
+        var tempVal = parseInt(tempSpan.innerText);
+        if(element.value == "°C") {
+            tempSpan.innerText = f2c(tempVal);
+        } else {
+            tempSpan.innerText = c2f(tempVal);
         }
     }
-    if(elementValue==="cº"){
-        for (let i= 0; i < elementMax.length; i++){
-            let valorMax= elementMax[i].innerHTML;
-            let fahrenheitMax= (valorMax-32)*(5/9);
-            elementMax[i].innerHTML= Math.round(fahrenheitMax);
-            let valorMin= elementMin[i].innerHTML;
-            let fahrenheitMin= (valorMin-32)*(5/9);
-            elementMin[i].innerHTML=Math.round(fahrenheitMin);   
-    }
-}
 }
